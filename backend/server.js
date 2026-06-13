@@ -16,7 +16,7 @@ import wantedRouter from './routes/wantedrouter.js';
 import messageRouter from './routes/messageRouter.js';
 
 
-import Message from "./models/messageModel.js";
+import Message from "./models/messagemodel.js";
 
 const app = express();
 const server = http.createServer(app);
