@@ -5,7 +5,7 @@ import {
   createWanted,
   getWantedPosts,
   getWantedById,
-} from "../controllers/wantedController.js";
+} from "../controllers/wantedcontroller.js";
 import { userAuth } from "../middleware/userAuth.js";
 
 const wantedRouter = express.Router();
