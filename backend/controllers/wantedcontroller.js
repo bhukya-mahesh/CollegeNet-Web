@@ -1,4 +1,4 @@
-import WantedModel from "../models/wantedModel.js";
+import WantedModel from "../models/wantedmodel.js";
 
 
 export const createWanted = async (req, res) => {
