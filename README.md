@@ -3,8 +3,8 @@ A full-stack MERN application designed for college communities to report lost & 
 CollegeNet helps students recover lost belongings, discover items available within their campus, and connect with peers through a secure and user-friendly platform.
 ---
 ## 🌐 Live Demo
-**Frontend:
-**Backend API:
+**Frontend:https://college-net-web.vercel.app/
+**Backend API:https://collegenet-web.onrender.com
 ---
 ## 📋 Features
 ### 🔐 User Authenticatio
