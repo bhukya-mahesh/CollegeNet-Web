@@ -14,8 +14,8 @@ import PostReqCard from "../components/wanted/PostReqCard";
 
 
 const Wanted = () => {
+   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4545/api";
   const navigate = useNavigate();
-
     const [posts, setPosts] = useState([]);
     const [loading , setLoading] = useState(true);
 
@@ -24,7 +24,7 @@ const Wanted = () => {
   const fetchPostRequests = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:4545/api/wanted/all"
+        `${API_URL}/wanted/all`
       );
 
       if (data.success) {
