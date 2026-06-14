@@ -43,7 +43,7 @@ try {
   );
 
   if (response.data.success) {
-     await checkAuth();
+
     navigate("/verify-email");
   } else {
     setError(response.data.message);
