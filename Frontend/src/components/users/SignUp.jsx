@@ -7,6 +7,7 @@ import {useAuth} from '../../context/AuthContext'
 const Register = () => {
 const navigate = useNavigate();
 const { checkAuth } = useAuth();
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4545/api";
 
 const [showPassword, setShowPassword] = useState(false);
 
@@ -34,7 +35,7 @@ try {
   setError("");
 
   const response = await axios.post(
-    "http://localhost:4545/api/auth/register",
+    `${API_URL}/auth/register`,
     formData,
     {
       withCredentials: true,
@@ -110,7 +111,7 @@ return ( <div className="min-h-screen bg-gray-50">
             required
             value={formData.name}
             onChange={handleChange}
-            placeholder="John Doe"
+            placeholder="Mahesh"
             className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>

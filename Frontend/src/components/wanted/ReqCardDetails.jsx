@@ -15,6 +15,7 @@ import axios from "axios";
 const ReqCardDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4545/api";
 
   const [post, setPost] = useState(null);
 
@@ -25,7 +26,7 @@ const ReqCardDetails = () => {
   const fetchPost = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:4545/api/wanted/${id}`
+        `${API_URL}/wanted/${id}`
       );
 
       if (data.success) {

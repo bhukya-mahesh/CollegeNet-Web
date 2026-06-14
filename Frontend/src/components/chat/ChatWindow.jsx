@@ -13,6 +13,7 @@ import { useLocation } from "react-router-dom";
 const ChatWindow = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4545/api";
 
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
@@ -30,14 +31,13 @@ const ChatWindow = () => {
   useEffect(() => {
 
     if(!currentUser || !receiverId) return;
-
   const fetchMessages = async () => {
 
     try {
 
       const { data } =
         await axios.get(
-          `http://localhost:4545/api/messages/${currentUser}/${receiverId}`
+          `${API_URL}/messages/${currentUser}/${receiverId}`
         );
 
       if (data.success) {

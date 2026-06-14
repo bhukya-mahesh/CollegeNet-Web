@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 const ResetPassword = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4545/api";
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -35,7 +36,7 @@ const ResetPassword = () => {
       setMessage("");
 
       const response = await axios.post(
-        "http://localhost:4545/api/auth/resetpassword",
+        `${API_URL}/auth/resetpassword`,
         formData
       );
 

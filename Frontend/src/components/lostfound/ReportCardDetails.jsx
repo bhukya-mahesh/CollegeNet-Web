@@ -14,6 +14,10 @@ const ReportCardDetails = () => {
   const { id } = useParams();
   console.log("ID:", id);
   const navigate = useNavigate();
+  const API_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:4545/api";
+ const SERVER_URL =
+  import.meta.env.VITE_SERVER_URL || "http://localhost:4545";
 
   const [report, setReport] = useState(null);
 
@@ -25,7 +29,7 @@ const ReportCardDetails = () => {
     try {
       
       const { data } = await axios.get(
-        `http://localhost:4545/api/lostfound/reports-card-details/${id}`,
+        `${API_URL}/lostfound/reports-card-details/${id}`,
         {
     withCredentials: true,
   }
@@ -69,7 +73,7 @@ console.log("REPORT USER ID:", report.userId);
         <div>
 
           <img
-            src={`http://localhost:4545/${report.photos?.[0]}`}
+            src={`${SERVER_URL}/${report.photos?.[0]}`}
             alt={report.title}
             className="w-full h-[400px] object-cover rounded-xl"
           />
@@ -78,7 +82,7 @@ console.log("REPORT USER ID:", report.userId);
             {report.photos?.map((photo, index) => (
               <img
                 key={index}
-                src={`http://localhost:4545/${photo}`}
+                src={`${SERVER_URL}/${photo}`}
                 alt=""
                 className="h-20 w-full object-cover rounded-lg"
               />

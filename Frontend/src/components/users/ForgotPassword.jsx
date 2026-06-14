@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4545/api";
+  
 
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -14,13 +16,13 @@ const ForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+
     try {
       setLoading(true);
       setError("");
       setMessage("");
-
       const response = await axios.post(
-        "http://localhost:4545/api/auth/send-reset-otp",
+        `${API_URL}/auth/send-reset-otp`,
         { email }
       );
 

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const Inbox = () => {
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4545/api";
   const [activeTab, setActiveTab] = useState("received");
   const [conversations, setConversations] = useState([]);
   const { user } = useAuth();
@@ -15,7 +16,7 @@ useEffect(() => {
    if(!user?._id) return ;
   axios
     .get(
-      `http://localhost:4545/api/messages/conversations/${user._id}`
+      `${API_URL}/messages/conversations/${user._id}`
     )
     .then((res) =>{
        console.log("CONVERSATIONS:", res.data);

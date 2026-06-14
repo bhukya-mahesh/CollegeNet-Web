@@ -8,6 +8,7 @@ import {useAuth} from '../../context/AuthContext'
 
 const Login = () => {
   const { checkAuth } = useAuth();
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4545/api";
 
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ const handleSubmit = async (e) => {
     setError("");
 
     const response = await axios.post(
-      "http://localhost:4545/api/auth/login",
+      `${API_URL}/auth/login`,
       formData,
       {
         withCredentials: true,

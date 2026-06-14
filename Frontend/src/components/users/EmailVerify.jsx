@@ -4,6 +4,7 @@ import { Mail, ShieldCheck } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const EmailVerify = () => {
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4545/api";
   const navigate = useNavigate();
 
   const [otp, setOtp] = useState("");
@@ -19,7 +20,7 @@ const EmailVerify = () => {
       setMessage("");
 
       const res = await axios.post(
-        "http://localhost:4545/api/auth/sendverifyotp",
+        `${API_URL}/auth/sendverifyotp`,
         {},
         {
           withCredentials: true,
@@ -50,7 +51,7 @@ const EmailVerify = () => {
       setMessage("");
 
       const res = await axios.post(
-        "http://localhost:4545/api/auth/verifyemailotp",
+        `${API_URL}/auth/verifyemailotp`,
         { otp },
         {
           withCredentials: true,

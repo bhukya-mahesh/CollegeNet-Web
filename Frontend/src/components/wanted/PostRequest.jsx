@@ -20,6 +20,7 @@ import axios from "axios";
 const PostRequest = ({ onClose }) => {
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4545/api";
 
   const [category, setCategory] = useState("");
   const [budget, setBudget] = useState("any");
@@ -77,7 +78,7 @@ const PostRequest = ({ onClose }) => {
     }
 
     const { data } = await axios.post(
-      "http://localhost:4545/api/wanted",
+      `${API_URL}/wanted`,
       formData,
       {
     withCredentials: true,

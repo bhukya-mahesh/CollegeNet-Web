@@ -16,13 +16,13 @@ import axios from "axios";
 const LostFound = () => {
 
   const navigate = useNavigate();
-
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4545/api";
   const [reports, setReports] = useState([]);
   useEffect(() => {
   const fetchReports = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:4545/api/lostfound/reports" ,
+        `${API_URL}/lostfound/reports` ,
         {
           withCredentials : true,
         }

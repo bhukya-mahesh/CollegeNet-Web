@@ -14,6 +14,7 @@ import axios from "axios";
 const ContactDetails = () => {
   const navigate = useNavigate();
   const { formData , setFormData} = useReport();
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4545/api";
 
   const methods = [
     {
@@ -95,7 +96,7 @@ const handleSubmit = async () => {
      console.log("FORM DATA:", formData);
      console.log("SUBMIT BUTTON CLICKED");
     await axios.post(
-      "http://localhost:4545/api/lostfound/reports",
+      `${API_URL}/lostfound/reports`,
       data ,{
         withCredentials : true ,
       }

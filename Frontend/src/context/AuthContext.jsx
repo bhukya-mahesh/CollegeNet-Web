@@ -8,10 +8,13 @@ export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  const API_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:4545/api";
+
   const checkAuth = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:4545/api/auth/isauthenticated",
+        `${API_URL}/auth/isauthenticated`,
         {},
         {
           withCredentials: true,
@@ -36,7 +39,7 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       await axios.post(
-        "http://localhost:4545/api/auth/logout",
+        `${API_URL}/auth/logout`,
         {},
         {
           withCredentials: true,
