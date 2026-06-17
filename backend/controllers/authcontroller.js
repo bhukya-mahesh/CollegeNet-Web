@@ -23,8 +23,13 @@ export const register = async (req, res) => {
 
             const user = new userModel({ name, email, password: hashedPassword });
             await user.save();
-            const token = jwt.sign({id: user._id },
-            process.env.JWT_SECRET, { expiresIn: "6d" });
+            console.log("NEW USER:", user._id);
+            const token = jwt.sign(
+                {id: user._id },
+            process.env.JWT_SECRET, 
+            { expiresIn: "6d" }
+        );
+            console.log("TOKEN FOR:", user._id);
             
             res.cookie("token", token, {
                 httpOnly: true,
@@ -140,7 +145,7 @@ export const sendverifyotp = async (req, res) => {
             const user = await userModel.findById(userId);
             
              console.log("FOUND USER:", user);
-             
+
              if (!user) {
                return res.json({
                   success: false,
