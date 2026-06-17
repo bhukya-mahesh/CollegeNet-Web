@@ -30,24 +30,6 @@ const server = http.createServer(app);
     credentials: true
   }
 });
-
-// const io = new Server(server, {
-//     cors: {
-//         origin: process.env.FRONTEND_URL || "http://localhost:5173",
-//         credentials: true
-//     }
-// });
-
-// io.on("connection", (socket) => {
-//     console.log("A user connected: " + socket.id);
-//     socket.on("disconnect", () => {
-//         console.log("A user disconnected: " + socket.id);
-//     });
-//     socket.on("newItem", (item) => {
-//         console.log("New item added: ", item);
-//         socket.broadcast.emit("newItem", item);
-//     });
-// });
 const onlineUsers = new Map();
 
 io.on("connection", (socket) => {
@@ -68,10 +50,7 @@ socket.on(
         text
     });
     await newMessage.save();
-    console.log(
-        "MESSAGE SAVED:",
-        newMessage.text
-      );
+    
 
     const receiverSocket =
       onlineUsers.get(receiverId);
@@ -91,8 +70,7 @@ socket.on(
 }
 );
 
-    console.log("A user connected:", socket.id);
-
+  
     socket.on("addUser", (userId) => {
 
         onlineUsers.set(
@@ -115,11 +93,6 @@ socket.on(
                 break;
             }
         }
-
-        console.log(
-            "A user disconnected:",
-            socket.id
-        );
     });
 });
   

@@ -22,80 +22,57 @@ export const register = async (req, res) => {
             const hashedPassword = await bcrypt.hash(password, 10);
 
             const user = new userModel({ name, email, password: hashedPassword });
-
-            console.log("Before save");
             await user.save();
-            console.log("After save");
-
             const token = jwt.sign({id: user._id },
             process.env.JWT_SECRET, { expiresIn: "6d" });
             
-            // res.cookie("token", token, {
-            //     httpOnly: true,
-            //     secure : process.env.NODE_ENV === "production",
-            //     sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
-            //     maxAge: 6 * 24 * 60 * 60 * 1000,
-            // });
-            
             res.cookie("token", token, {
-            httpOnly: true,
-             secure: true,
-             sameSite: "none",
-             maxAge: 6 * 24 * 60 * 60 * 1000,
-          });
+                httpOnly: true,
+                secure : process.env.NODE_ENV === "production",
+                sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+                maxAge: 6 * 24 * 60 * 60 * 1000,
+            });
+            
+        //     res.cookie("token", token, {
+        //     httpOnly: true,
+        //      secure: true,
+        //      sameSite: "none",
+        //      maxAge: 6 * 24 * 60 * 60 * 1000,
+        //   });
               
+await axios.post( "https://api.brevo.com/v3/smtp/email",
+                {
+                  sender: {
+                    name: "CollegeNet",
+                   email: process.env.SENDER_EMAIL,
+                 },
+              to: [
+             {
+                   email: email,
+              },
+               ],
+           subject: "Welcome to CollegeNet",
+           textContent: `Hi ${name},
 
-        const mailoptions ={
-            from : process.env.SENDER_EMAIL,
-            to : email,
-            subject : "Welcome to CollegeNet",
-            text : `Hi ${name},\n\nYour email id is ${email}\n\nWelcome to CollegeNet! We're excited to have you on board. If you have any questions or need assistance, feel free to reach out.\n\nBest regards,\nThe CollegeNet Team`
-        }
-           console.log("Before mail");
-         //  await transporter.sendMail(mailoptions);
-          await axios.post(
-  "https://api.brevo.com/v3/smtp/email",
-  {
-    sender: {
-      name: "CollegeNet",
-      email: process.env.SENDER_EMAIL,
-    },
-    to: [
-      {
-        email: email,
-      },
-    ],
-    subject: "Welcome to CollegeNet",
-    textContent: `Hi ${name},
+                 Welcome to CollegeNet! We're excited to have you on board. If you have any questions or need assistance, feel free to reach out.\n\nBest regards,\nThe CollegeNet Team
 
-Welcome to CollegeNet! We're excited to have you on board.
-
-Best regards,
-The CollegeNet Team`,
-  },
-  {
-    headers: {
-      "api-key": process.env.BREVO_API_KEY,
-      "Content-Type": "application/json",
-      accept: "application/json",
-    },
-  }
-);
-            console.log("After mail");
+             Best regards,
+            The CollegeNet Team`,
+           },
+             {
+              headers: {
+               "api-key": process.env.BREVO_API_KEY,
+              "Content-Type": "application/json",
+               accept: "application/json",
+               },
+           }
+        );
 
             return res.json({ success: true, message: "User registered successfully" });
 
-        // }catch(error){
-        //     res.json({ success: false, message: error.message });
-        // }
-      }catch(error){
-    console.log("MAIL ERROR:", error.response?.data || error.message);
-
-    res.json({
-        success:false,
-        message:error.message
-    });
-}  
+        }catch(error){
+            res.json({ success: false, message: error.message });
+        }
 }
 
 
@@ -177,36 +154,28 @@ export const sendverifyotp = async (req, res) => {
             user.verifyOtp = otp;
             user.verifyOtpExpireAt = Date.now() + 10 * 60 * 1000;
             await user.save();
-
-            // const mailoptions ={
-            //     from : process.env.SENDER_EMAIL,
-            //     to : user.email,
-            //     subject : "Your Account Verification OTP",
-            //     text : `Hi ${user.name},\n\nYour OTP for account verification is ${otp}. This OTP is valid for 10 minutes.\n\nBest regards,\nThe CollegeNet Team`
-            // };
            
-           await axios.post(
-  "https://api.brevo.com/v3/smtp/email",
-  {
-    sender: {
-      name: "CollegeNet",
-      email: process.env.SENDER_EMAIL,
-    },
-    to: [
-      {
-        email: user.email,
-      },
-    ],
-    subject: "Your Account Verification OTP",
-    textContent: `Your OTP is ${otp}`,
-  },
-  {
-    headers: {
-      "api-key": process.env.BREVO_API_KEY,
-      "Content-Type": "application/json",
-    },
-  }
-);
+            await axios.post( "https://api.brevo.com/v3/smtp/email",
+               {
+               sender: {
+               name: "CollegeNet",
+               email: process.env.SENDER_EMAIL,
+              },
+              to: [
+              {
+                email: user.email,
+               },
+            ],
+            subject: "Your Account Verification OTP",
+            textContent: `Hi ${user.name},\n\nYour OTP for account verification is ${otp}. This OTP is valid for 10 minutes.\n\nBest regards,\nThe CollegeNet Team`,
+           },
+          {
+            headers: {
+              "api-key": process.env.BREVO_API_KEY,
+              "Content-Type": "application/json",
+           },
+          }
+         );
 
             return res.json({
                 success: true,
