@@ -10,6 +10,8 @@ const  transporter = nodemailer.createTransport({
      }
  
 });
+  console.log("SMTP USER:", process.env.SMPT_USER);
+  console.log("SMTP PASS EXISTS:", !!process.env.SMPT_PASS);
 
 transporter.verify(function (error, success) {
   if (error) {
