@@ -30,12 +30,13 @@ export const register = async (req, res) => {
             //     sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
             //     maxAge: 6 * 24 * 60 * 60 * 1000,
             // });
+            
             res.cookie("token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-      maxAge: 6 * 24 * 60 * 60 * 1000,
-    });
+            httpOnly: true,
+             secure: true,
+             sameSite: "none",
+             maxAge: 6 * 24 * 60 * 60 * 1000,
+          });
               
 
         const mailoptions ={
