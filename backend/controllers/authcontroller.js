@@ -50,11 +50,17 @@ export const register = async (req, res) => {
             subject : "Welcome to CollegeNet",
             text : `Hi ${name},\n\nYour email id is ${email}\n\nWelcome to CollegeNet! We're excited to have you on board. If you have any questions or need assistance, feel free to reach out.\n\nBest regards,\nThe CollegeNet Team`
         }
-         
+         try {
            console.log("Before mail");
-           await transporter.sendMail(mailoptions);
+         const info =  await transporter.sendMail(mailoptions);
            console.log("After mail");
-            
+         }catch(err){
+            console.log("MAil error :", err);
+            return res.json({
+                success: false,
+                message: err.message,
+            })
+         } 
             
             return res.json({ success: true, message: "User registered successfully" });
 
