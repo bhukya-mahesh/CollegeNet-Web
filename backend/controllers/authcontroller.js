@@ -4,6 +4,8 @@ import userModel from "../models/userModel.js";
 import transporter from "../config/nodemailer.js";
 
 export const register = async (req, res) => {
+      console.log("REGISTER API HIT");
+      console.log(req.body);
     const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
@@ -19,7 +21,10 @@ export const register = async (req, res) => {
             const hashedPassword = await bcrypt.hash(password, 10);
 
             const user = new userModel({ name, email, password: hashedPassword });
+
+            console.log("Before save");
             await user.save();
+            console.log("After save");
 
             const token = jwt.sign({id: user._id },
             process.env.JWT_SECRET, { expiresIn: "6d" });
@@ -46,8 +51,11 @@ export const register = async (req, res) => {
             text : `Hi ${name},\n\nYour email id is ${email}\n\nWelcome to CollegeNet! We're excited to have you on board. If you have any questions or need assistance, feel free to reach out.\n\nBest regards,\nThe CollegeNet Team`
         }
          
-         await transporter.sendMail(mailoptions);
-
+           console.log("Before mail");
+        // await transporter.sendMail(mailoptions);
+           console.log("After mail");
+            
+            
             return res.json({ success: true, message: "User registered successfully" });
 
         }catch(error){
