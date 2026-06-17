@@ -52,7 +52,7 @@ export const register = async (req, res) => {
         }
          
            console.log("Before mail");
-        // await transporter.sendMail(mailoptions);
+           await transporter.sendMail(mailoptions);
            console.log("After mail");
             
             
