@@ -31,19 +31,20 @@ export const register = async (req, res) => {
         );
             console.log("TOKEN FOR:", user._id);
 
-            res.cookie("token", token, {
-                httpOnly: true,
-                secure : process.env.NODE_ENV === "production",
-                sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
-                maxAge: 6 * 24 * 60 * 60 * 1000,
-            });
+            // res.cookie("token", token, {
+            //     httpOnly: true,
+            //     secure : process.env.NODE_ENV === "production",
+            //     sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+            //     maxAge: 6 * 24 * 60 * 60 * 1000,
+            // });
             console.log("COOKIE SET");
-        //     res.cookie("token", token, {
-        //     httpOnly: true,
-        //      secure: true,
-        //      sameSite: "none",
-        //      maxAge: 6 * 24 * 60 * 60 * 1000,
-        //   });
+            res.cookie("token", token, {
+            httpOnly: true,
+             secure: true,
+             sameSite: "none",
+             maxAge: 6 * 24 * 60 * 60 * 1000,
+          });
+           console.log("COOKIE SET");
               
 await axios.post( "https://api.brevo.com/v3/smtp/email",
                 {
