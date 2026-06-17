@@ -135,10 +135,12 @@ export const sendverifyotp = async (req, res) => {
         try {
              console.log("TOKEN:", req.cookies?.token);
              console.log("USER ID:", req.userId);
-             
+
             const userId = req.userId;
             const user = await userModel.findById(userId);
-
+            
+             console.log("FOUND USER:", user);
+             
              if (!user) {
                return res.json({
                   success: false,
