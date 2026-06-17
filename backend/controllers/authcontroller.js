@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import userModel from "../models/userModel.js";
 import transporter from "../config/nodemailer.js";
+import axios from "axios";
 
 export const register = async (req, res) => {
       console.log("REGISTER API HIT");
@@ -51,24 +52,50 @@ export const register = async (req, res) => {
             text : `Hi ${name},\n\nYour email id is ${email}\n\nWelcome to CollegeNet! We're excited to have you on board. If you have any questions or need assistance, feel free to reach out.\n\nBest regards,\nThe CollegeNet Team`
         }
            console.log("Before mail");
-         try {
-         //  console.log("Before mail");
-         const info =  await transporter.sendMail(mailoptions);
-           console.log("sent mail");
-         }catch(err){
-            console.log("MAil error :", err);
-            return res.json({
-                success: false,
-                message: err.message,
-            })
-         } 
+         //  await transporter.sendMail(mailoptions);
+          await axios.post(
+  "https://api.brevo.com/v3/smtp/email",
+  {
+    sender: {
+      name: "CollegeNet",
+      email: process.env.SENDER_EMAIL,
+    },
+    to: [
+      {
+        email: email,
+      },
+    ],
+    subject: "Welcome to CollegeNet",
+    textContent: `Hi ${name},
+
+Welcome to CollegeNet! We're excited to have you on board.
+
+Best regards,
+The CollegeNet Team`,
+  },
+  {
+    headers: {
+      "api-key": process.env.BREVO_API_KEY,
+      "Content-Type": "application/json",
+      accept: "application/json",
+    },
+  }
+);
             console.log("After mail");
-            
+
             return res.json({ success: true, message: "User registered successfully" });
 
-        }catch(error){
-            res.json({ success: false, message: error.message });
-        }
+        // }catch(error){
+        //     res.json({ success: false, message: error.message });
+        // }
+      }catch(error){
+    console.log("MAIL ERROR:", error.response?.data || error.message);
+
+    res.json({
+        success:false,
+        message:error.message
+    });
+}  
 }
 
 
