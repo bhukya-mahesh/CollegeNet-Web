@@ -178,14 +178,35 @@ export const sendverifyotp = async (req, res) => {
             user.verifyOtpExpireAt = Date.now() + 10 * 60 * 1000;
             await user.save();
 
-            const mailoptions ={
-                from : process.env.SENDER_EMAIL,
-                to : user.email,
-                subject : "Your Account Verification OTP",
-                text : `Hi ${user.name},\n\nYour OTP for account verification is ${otp}. This OTP is valid for 10 minutes.\n\nBest regards,\nThe CollegeNet Team`
-            };
+            // const mailoptions ={
+            //     from : process.env.SENDER_EMAIL,
+            //     to : user.email,
+            //     subject : "Your Account Verification OTP",
+            //     text : `Hi ${user.name},\n\nYour OTP for account verification is ${otp}. This OTP is valid for 10 minutes.\n\nBest regards,\nThe CollegeNet Team`
+            // };
            
-            await transporter.sendMail(mailoptions);
+           await axios.post(
+  "https://api.brevo.com/v3/smtp/email",
+  {
+    sender: {
+      name: "CollegeNet",
+      email: process.env.SENDER_EMAIL,
+    },
+    to: [
+      {
+        email: user.email,
+      },
+    ],
+    subject: "Your Account Verification OTP",
+    textContent: `Your OTP is ${otp}`,
+  },
+  {
+    headers: {
+      "api-key": process.env.BREVO_API_KEY,
+      "Content-Type": "application/json",
+    },
+  }
+);
 
             return res.json({
                 success: true,
