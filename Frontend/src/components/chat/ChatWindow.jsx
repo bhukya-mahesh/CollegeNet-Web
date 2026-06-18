@@ -34,26 +34,18 @@ const ChatWindow = () => {
   const fetchMessages = async () => {
 
     try {
-
       const { data } =
         await axios.get(
           `${API_URL}/messages/${currentUser}/${receiverId}`
         );
-
       if (data.success) {
-
         setMessages(
           data.messages
         );
-
       }
-
     } catch (error) {
-
       console.log(error);
-
     }
-
   };
 
   fetchMessages();
@@ -77,8 +69,6 @@ const ChatWindow = () => {
   }, [messages]);
 
   const handleSend = () => {
-     
-
     if (!message.trim()) return;
     if (!currentUser || !receiverId) return;
 
@@ -94,10 +84,10 @@ const ChatWindow = () => {
       newMessage
     );
 
-    // setMessages((prev) => [
-    //   ...prev,
-    //   newMessage,
-    // ]);
+    setMessages((prev) => [
+      ...prev,
+      newMessage,
+    ]);
 
     setMessage("");
   };
