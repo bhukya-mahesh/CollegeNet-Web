@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:4545",{
+const socket = io("https://collegenet-web.onrender.com",{
     autoConnect: false,
 });
 
