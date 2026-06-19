@@ -70,7 +70,7 @@ const ReqCardDetails = () => {
 
         {/* Image */}
         <div>
-          <img
+          {/* <img
             src={
               post.image
                 ? `http://localhost:4545/${post.image}`
@@ -78,7 +78,15 @@ const ReqCardDetails = () => {
             }
             alt={post.title}
             className="w-full h-[450px] object-cover rounded-2xl border"
-          />
+          /> */}
+          <img
+  src={
+    post.image ||
+    "https://placehold.co/800x600?text=Wanted+Item"
+  }
+  alt={post.title}
+  className="w-full h-[450px] object-cover rounded-2xl border"
+/>
         </div>
 
         {/* Details */}

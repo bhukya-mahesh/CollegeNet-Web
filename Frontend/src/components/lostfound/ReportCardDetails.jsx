@@ -72,21 +72,37 @@ console.log("REPORT USER ID:", report.userId);
         {/* Photos */}
         <div>
 
-          <img
+          {/* <img
             src={`${SERVER_URL}/${report.photos?.[0]}`}
             alt={report.title}
             className="w-full h-[400px] object-cover rounded-xl"
-          />
+          /> */}
+           
+           <img
+  src={report.photos?.[0]}
+  alt={report.title}
+  className="w-full h-[400px] object-cover rounded-xl"
+/>
 
           <div className="grid grid-cols-4 gap-2 mt-3">
-            {report.photos?.map((photo, index) => (
+            {/* {report.photos?.map((photo, index) => (
               <img
                 key={index}
                 src={`${SERVER_URL}/${photo}`}
                 alt=""
                 className="h-20 w-full object-cover rounded-lg"
               />
-            ))}
+            ))} */}
+
+            {report.photos?.map((photo, index) => (
+  <img
+    key={index}
+    src={photo}
+    alt=""
+    className="h-20 w-full object-cover rounded-lg"
+  />
+))}
+
           </div>
 
         </div>

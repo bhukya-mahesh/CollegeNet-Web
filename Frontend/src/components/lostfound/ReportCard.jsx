@@ -15,18 +15,14 @@ const ReportCard = ({ item }) => {
     <div className="bg-white rounded-xl shadow-sm border hover:shadow-md transition overflow-hidden">
 
       {/* Image */}
-      <div className="h-48 bg-gray-100">
-        <img
-          src={
-            item.photos?.[0]
-              ? `http://localhost:4545/${item.photos[0]}`
-              : "/placeholder.png"
-          }
-          alt={item.title}
-          className="w-full h-full object-cover"
-        />
-      </div>
-
+   
+  <div className="h-48 bg-gray-100">
+  <img
+    src={item.photos?.length > 0 ? item.photos[0] : "/placeholder.png"}
+    alt={item.title}
+    className="w-full h-full object-cover"
+  />
+</div>
       {/* Content */}
       <div className="p-4">
 
