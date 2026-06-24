@@ -47,7 +47,7 @@ const App = () => {
           <Route path="/wanted" element={<Wanted />} />
           <Route path="/notification" element={<Notification />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/itemssss" element={<ItemDetails />} /> 
+          <Route path="/item-details/:id" element={<ItemDetails />} /> 
           <Route path="/add-item" element={<AddItem />} />
           <Route path="/report-item" element={<ReportItem />} />
           <Route path="/claim-item" element={<ClaimItem />} />

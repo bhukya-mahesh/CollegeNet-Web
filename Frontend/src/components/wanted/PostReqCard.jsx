@@ -25,13 +25,13 @@ const PostReqCard = ({ item }) => {
       {/* Image */}
       <div className="h-48 bg-gray-100">
         <img
-  src={
-    item.image ||
-    "https://placehold.co/600x400?text=Wanted+Item"
-  }
-  alt={item.title}
-  className="w-full h-full object-cover"
-/>
+        src={
+              item.image ||
+            "https://placehold.co/600x400?text=Wanted+Item"
+         }
+        alt={item.title}
+       className="w-full h-full object-cover"
+      />
       </div>
 
       {/* Content */}

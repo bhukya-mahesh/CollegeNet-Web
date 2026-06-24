@@ -25,24 +25,22 @@ const ReportCardDetails = () => {
     fetchReport();
   }, []);
 
-  const fetchReport = async () => {
-    try {
-      
+  const fetchReport = async () =>{
+     try {
       const { data } = await axios.get(
         `${API_URL}/lostfound/reports-card-details/${id}`,
         {
-    withCredentials: true,
-  }
-
+          withCredentials : true,
+        }
       );
-
-      if (data.success) {
+      if(data.success){
         setReport(data.report);
       }
-    } catch (error) {
+
+     }catch(error){
       console.log(error);
-    }
-  };
+     };
+  }
 
   if (!report) {
     return (
@@ -53,7 +51,7 @@ const ReportCardDetails = () => {
   }
 
   console.log(report);
-console.log("REPORT USER ID:", report.userId);
+  console.log("REPORT USER ID:", report.userId);
 
 
   return (
@@ -70,38 +68,22 @@ console.log("REPORT USER ID:", report.userId);
       <div className="grid lg:grid-cols-2 gap-8">
 
         {/* Photos */}
-        <div>
-
-          {/* <img
-            src={`${SERVER_URL}/${report.photos?.[0]}`}
-            alt={report.title}
-            className="w-full h-[400px] object-cover rounded-xl"
-          /> */}
-           
+        <div>     
            <img
-  src={report.photos?.[0]}
-  alt={report.title}
-  className="w-full h-[400px] object-cover rounded-xl"
-/>
-
-          <div className="grid grid-cols-4 gap-2 mt-3">
-            {/* {report.photos?.map((photo, index) => (
-              <img
-                key={index}
-                src={`${SERVER_URL}/${photo}`}
-                alt=""
-                className="h-20 w-full object-cover rounded-lg"
+                  src={report.photos?.[0]}
+                  alt={report.title}
+                  className="w-full h-[400px] object-cover rounded-xl"
               />
-            ))} */}
+          <div className="grid grid-cols-4 gap-2 mt-3">
 
             {report.photos?.map((photo, index) => (
-  <img
-    key={index}
-    src={photo}
-    alt=""
-    className="h-20 w-full object-cover rounded-lg"
-  />
-))}
+           <img
+                key={index}
+                src={photo}
+                alt=""
+                className="h-20 w-full object-cover rounded-lg"
+          />
+         ))}
 
           </div>
 

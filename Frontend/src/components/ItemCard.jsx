@@ -1,13 +1,15 @@
 import React from "react";
 import { Tag, Package } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const ItemCard = ({ item, onSelect }) => {
+  const navigate  = useNavigate();
   const imageUrl = item.images && item.images[0] ? item.images[0] : null;
 
   return (
     <div
       className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden hover:shadow-md transition cursor-pointer"
-      onClick={() => onSelect(item)}
+     
     >
       {/* Image */}
       <div className="bg-linear-to-br from-gray-100 to-gray-200 h-40 flex items-center justify-center">
@@ -53,6 +55,10 @@ const ItemCard = ({ item, onSelect }) => {
           </div>
           <span className="text-xs font-semibold px-2 py-1 rounded bg-blue-100 text-blue-700">
             {item.mode}
+          </span>
+           <span   onClick={() => navigate(`/item-details/${item._id}`)}
+            className="text-xs font-semibold px-2 py-1 rounded bg-blue-100 text-blue-700">
+            View Details
           </span>
         </div>
       </div>

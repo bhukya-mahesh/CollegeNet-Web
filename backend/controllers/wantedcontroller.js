@@ -2,31 +2,6 @@ import fs from 'fs';
 import imagekit from '../config/imagekit.js';
 import WantedModel from "../models/wantedmodel.js";
 
-
-
-// export const createWanted = async (req, res) => {
-//   try {
-//     const wanted = new WantedModel({
-//       ...req.body,
-//       userId: req.userId,
-//       image: req.file?.path || "",
-//     });
-
-//     await wanted.save();
-
-//     res.status(201).json({
-//       success: true,
-//       wanted,
-//     });
-//   } catch (error) {
-//     console.log(error);
-
-//     res.status(500).json({
-//       success: false,
-//       message: error.message,
-//     });
-//   }
-// };
 export const createWanted = async (req, res) => {
   try {
     let imageUrl = "";

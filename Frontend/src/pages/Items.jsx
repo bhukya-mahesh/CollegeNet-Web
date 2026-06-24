@@ -1,18 +1,15 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { Plus } from "lucide-react";
 import ItemCard from "../components/ItemCard";
-import ItemDetails from "../components/ItemDetails";
 import { getItems } from "../services/api";
 import { useNavigate } from "react-router-dom";
 
 const Items = () => {
    const navigate = useNavigate();
-  // State - initialize as empty
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // State
   const [filters, setFilters] = useState({
     search: "",
     category: "All Categories",
@@ -24,7 +21,7 @@ const Items = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [requestStatus, setRequestStatus] = useState({});
 
-  // Fetch items from database
+
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -46,7 +43,7 @@ const Items = () => {
     fetchItems();
   }, []);
 
-  // Filter items based on criteria
+  
   const filteredItems = useMemo(() => {
     return items.filter((item) => {
       const matchesSearch = item.title
@@ -90,7 +87,7 @@ const Items = () => {
       ...prev,
       [itemId]: "requested",
     }));
-    // In real app, send request to backend
+   
     alert(
       itemMode === "Give Away"
         ? "Item claimed! You will be notified once confirmed."
@@ -208,7 +205,8 @@ const Items = () => {
             <ItemCard
               key={item._id || item.id}
               item={item}
-              onSelect={setSelectedItem}
+              // onSelect={setSelectedItem}
+               onClick={()=>navigate('/item-details')}
             />
           ))}
         </div>

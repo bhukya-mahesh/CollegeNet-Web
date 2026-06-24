@@ -2,14 +2,14 @@ import jwt from "jsonwebtoken";
 
 export const userAuth = (req, res, next) => {
     const {token} = req.cookies;
-    console.log("COOKIE TOKEN :" ,token);
+   // console.log("COOKIE TOKEN :" ,token);
     
     if(!token){
         return res.json({ success: false, message: "Unauthorized" });
     }
     try {
       const tokendecoded = jwt.verify(token, process.env.JWT_SECRET);
-         console.log("TOKEN USER ID :",tokendecoded.id);
+     //    console.log("TOKEN USER ID :",tokendecoded.id);
          
       if(tokendecoded.id){
         req.userId = tokendecoded.id;
