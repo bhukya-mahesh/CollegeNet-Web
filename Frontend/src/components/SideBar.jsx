@@ -45,7 +45,7 @@ const Sidebar = () => {
         </div>
         <div>
           <h1 className="text-2xl font-bold text-slate-900">CollegeNet</h1>
-          <p className="text-sm text-gray-500">student.college.edu</p>
+          <p className="text-sm text-gray-500">Connect.Trade.Belong.</p>
         </div>
       </div>
 

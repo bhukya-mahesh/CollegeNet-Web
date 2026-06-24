@@ -111,7 +111,7 @@ return ( <div className="min-h-screen bg-gray-50">
             required
             value={formData.name}
             onChange={handleChange}
-            placeholder="Mahesh"
+            placeholder="Your Name"
             className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
@@ -128,7 +128,7 @@ return ( <div className="min-h-screen bg-gray-50">
             required
             value={formData.email}
             onChange={handleChange}
-            placeholder="your.email@college.edu"
+            placeholder="Your college email"
             className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
