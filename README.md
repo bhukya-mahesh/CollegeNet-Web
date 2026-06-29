@@ -9,6 +9,9 @@ CollegeNet helps students recover lost belongings, discover items available with
 ---
 ## 📋 Features
 ### 🔐 User Authentication
+Screenshot : 
+<img width="1440" height="1440" alt="WhatsApp Image 2026-06-29 at 14 58 33" src="https://github.com/user-attachments/assets/8ad5a4c4-904a-4798-bdfd-71baff27af75" />
+
 * Email-based registration and login
 * Email verification
 * Password reset functionality
